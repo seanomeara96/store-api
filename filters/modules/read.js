@@ -1,7 +1,7 @@
 const store = require("../config/axios-config");
 
-const getFilters = (productId) => {
-  return new Promise(async (resolve, reject) => {
+const getFilters = (productId) =>
+  new Promise(async (resolve, reject) => {
     try {
       const response = await store.get(
         `/catalog/products/${productId}/custom-fields`
@@ -11,10 +11,9 @@ const getFilters = (productId) => {
       reject(err);
     }
   });
-};
 
-const getFiltersOfMany = (productIds) => {
-  return new Promise((resolve, reject) => {
+const getFiltersOfMany = (productIds) =>
+  new Promise((resolve, reject) => {
     let promises = [];
     let response = {};
     productIds.forEach((product) => {
@@ -29,7 +28,6 @@ const getFiltersOfMany = (productIds) => {
       .then(() => resolve(response))
       .catch(reject);
   });
-};
 
 exports.getFilters = getFilters;
 exports.getFiltersOfMany = getFiltersOfMany;
