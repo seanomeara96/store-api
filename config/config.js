@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 const path = require("path");
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const config = {
   fs_xAuthTokenHeader: returnTokenHeader(process.env.FS_XAUTHTOKEN),
   bf_xAuthTokenHeader: returnTokenHeader(process.env.BF_XAUTHTOKEN),
