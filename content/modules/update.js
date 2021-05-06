@@ -17,11 +17,13 @@ const removeLine = (productId, lineToRemove) =>
     validateParams(productId, lineToRemove, reject);
     try {
       const productDescription = await getProductDescription(productId);
+      console.log(productDescription)
       const updatedProductDescription = productDescription.replace(
         lineToRemove,
         ""
       );
       await updateProductDescription(productId, updatedProductDescription);
+      if(productDescription == updatedProductDescription) return reject("no change was made")
       resolve();
     } catch (err) {
       reject(err);
