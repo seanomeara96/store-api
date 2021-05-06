@@ -1,9 +1,10 @@
 const store = require("../config/axios-config");
 const { getFilters } = require("./read");
 
-const removeFilter = (productId, name, value) => {
-  return new Promise(async (resolve, reject) => {
-    if (name == "" || value == "") reject();
+const removeFilter = (productId, name, value) =>
+  new Promise(async (resolve, reject) => {
+    if (name == "" || value == "")
+      return reject("please provide a key & a value");
     try {
       const filters = await getFilters(productId);
       const filterToDelete = filters.find(
@@ -14,25 +15,25 @@ const removeFilter = (productId, name, value) => {
           `/catalog/products/${productId}/custom-fields/${filterToDelete.id}`
         )
         .then(resolve)
-        .catch(reject);
+        .catch((err) =>
+          reject("something went wrong while deleting this filter", err)
+        );
     } catch (err) {
-      reject(err);
+      reject("error fetching this products filters", err);
     }
   });
-};
 
-const removeManyFilters = (productId, filters) => {
-  return new Promise((resolve, reject) => {
+const removeManyFilters = (productId, filters) =>
+  new Promise((resolve, reject) => {
     let promises = [];
     filters.forEach(({ name, value }) => {
       promises.push(removeFilter(productId, name, value));
     });
     Promise.allSettled(promises).then(resolve).catch(reject);
   });
-};
 
-const removeFilterFromMany = (productIds, name, value) => {
-  return new Promise((resolve, reject) => {
+const removeFilterFromMany = (productIds, name, value) =>
+  new Promise((resolve, reject) => {
     let promises = [];
     productIds.forEach((product) => {
       let idKey = Object.keys(product)[0];
@@ -40,10 +41,9 @@ const removeFilterFromMany = (productIds, name, value) => {
     });
     Promise.allSettled(promises).then(resolve).catch(reject);
   });
-};
 
-const removeManyFiltersFromMany = (productIds, filters) => {
-  return new Promise((resolve, reject) => {
+const removeManyFiltersFromMany = (productIds, filters) =>
+  new Promise((resolve, reject) => {
     let promises = [];
     productIds.forEach((product) => {
       let idKey = Object.keys(product)[0];
@@ -51,7 +51,6 @@ const removeManyFiltersFromMany = (productIds, filters) => {
     });
     Promise.allSettled(promises).then(resolve).catch(reject);
   });
-};
 
 exports.removeFilter = removeFilter;
 exports.removeManyFilters = removeManyFilters;
