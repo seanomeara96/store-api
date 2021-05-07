@@ -1,17 +1,23 @@
 const store = require("./config/axios-config");
-store
-  .get("/catalog/products?limit=5000")
-  .then(({ data }) => {
-    let count = 1;
+let pageNumber = 1;
+let products = [];
+async function getAllProducts() {
+  try {
+    const { data } = await store.get(
+      `/catalog/products?limit=250&page=${pageNumber}`
+    );
     const productsArray = data.data;
-    console.log(productsArray);
-    let newArr = productsArray.map((product) => {
-      let info = `${count} => ${product["id"]}  ${product["name"]} ${product["sku"]}\n`;
-      count++;
-      return info;
-    });
-    //console.log(newArr.join(""))
-  })
-  .catch((err) => {
+    console.log(typeof [...productsArray])
+    // console.log(products)
+    products.push(productsArray);
+    if (productsArray.length) {
+      pageNumber++;
+      getAllProducts();
+    } else {
+      console.log(products.lentgh)
+    }
+  } catch (err) {
     console.log(err);
-  });
+  }
+}
+getAllProducts()
