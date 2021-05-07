@@ -7,14 +7,13 @@ async function getAllProducts() {
       `/catalog/products?limit=250&page=${pageNumber}`
     );
     const productsArray = data.data;
-    console.log(typeof [...productsArray])
-    // console.log(products)
-    products.push(productsArray);
+    console.log(`Page ${pageNumber}`)
+    products = [...products,...productsArray]
     if (productsArray.length) {
       pageNumber++;
       getAllProducts();
     } else {
-      console.log(products.lentgh)
+      console.log(products.length)
     }
   } catch (err) {
     console.log(err);
