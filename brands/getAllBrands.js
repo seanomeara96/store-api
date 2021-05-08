@@ -4,8 +4,4 @@ const { getAll } = require("../requests/getAll");
  * @param {*} params
  * @returns
  */
-const getAllBrands = getAll("/catalog/brands");
-
-getAllBrands()
-  .then((res) => console.log(res.length))
-  .catch((err) => console.log(err));
+exports.getAllBrands = getAll("/catalog/brands");
