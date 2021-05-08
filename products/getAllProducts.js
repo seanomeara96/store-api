@@ -4,7 +4,4 @@ const { getAll } = require("../requests/getAll");
  * @param {*} params
  * @returns resolves with an array of product objects
  */
-const getAllProducts = getAll(`/catalog/products`);
-getAllProducts()
-  .then((res) => console.log(res.length))
-  .catch((err) => console.log(err));
+exports.getAllProducts = getAll(`/catalog/products`);
