@@ -47,13 +47,15 @@ const addLineToMany = (productIds, lineToAdd) =>
 const addLineToBrandProducts = (brandName, lineToAdd) =>
   new Promise((resolve, reject) => {
     let promises = [];
-    getProductsByBrand(brandName).then((products) =>
-      products.forEach(({id}) => {
-        promises.push(addLine(id, lineToAdd));
+    getProductsByBrand(brandName)
+      .then((products) => {
+        products.forEach(({ id }) => {
+          promises.push(addLine(id, lineToAdd));
+        });
+        Promise.allSettled(promises)
+          .then((res) => resolve(res))
+          .catch((err) => reject(err));
       })
-    ).catch(err => reject(err))
-    Promise.allSettled(promises)
-      .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 
@@ -74,7 +76,6 @@ exports.removeLine = removeLine;
 exports.removeLineFromMany = removeLineFromMany;
 exports.addLineToBrandProducts = addLineToBrandProducts;
 
-
 function getProductDescription(id) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -93,7 +94,7 @@ function updateProductDescription(productId, updatedProductDescription) {
       .put(`/catalog/products/${productId}`, {
         description: updatedProductDescription,
       })
-      .then((res) = resolve(res))
+      .then((res = resolve(res)))
       .catch((err) => reject(err));
   });
 }
