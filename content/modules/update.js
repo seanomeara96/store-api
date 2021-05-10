@@ -59,6 +59,21 @@ const addLineToBrandProducts = (brandName, lineToAdd) =>
       .catch((err) => reject(err));
   });
 
+  const removeLineFromBrandProducts = (brandName, lineToRemove) =>
+  new Promise((resolve, reject) => {
+    let promises = [];
+    getProductsByBrand(brandName)
+      .then((products) => {
+        products.forEach(({ id }) => {
+          promises.push(removeLine(id, lineToRemove));
+        });
+        Promise.allSettled(promises)
+          .then((res) => resolve(res))
+          .catch((err) => reject(err));
+      })
+      .catch((err) => reject(err));
+  });
+
 const removeLineFromMany = (productIds, lineToRemove) =>
   new Promise((resolve, reject) => {
     let promises = [];
@@ -75,7 +90,7 @@ exports.addLineToMany = addLineToMany;
 exports.removeLine = removeLine;
 exports.removeLineFromMany = removeLineFromMany;
 exports.addLineToBrandProducts = addLineToBrandProducts;
-
+exports.removeLineFromBrandProducts = removeLineFromBrandProducts;
 function getProductDescription(id) {
   return new Promise(async (resolve, reject) => {
     try {
