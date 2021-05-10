@@ -1,4 +1,5 @@
 const store = require("../../config/axios-config");
+const { getProductsByBrand } = require("../../products/getProductsByBrand");
 const addLine = (productId, lineToAdd) =>
   new Promise(async (resolve, reject) => {
     validateParams(productId, lineToAdd, reject);
@@ -6,7 +7,7 @@ const addLine = (productId, lineToAdd) =>
       const productDescription = await getProductDescription(productId);
       const updatedProductDescription = lineToAdd + productDescription;
       await updateProductDescription(productId, updatedProductDescription);
-      resolve();
+      resolve("Line added");
     } catch (err) {
       reject(err);
     }
@@ -17,13 +18,14 @@ const removeLine = (productId, lineToRemove) =>
     validateParams(productId, lineToRemove, reject);
     try {
       const productDescription = await getProductDescription(productId);
-      console.log(productDescription)
+      console.log(productDescription);
       const updatedProductDescription = productDescription.replace(
         lineToRemove,
         ""
       );
       await updateProductDescription(productId, updatedProductDescription);
-      if(productDescription == updatedProductDescription) return reject("no change was made")
+      if (productDescription == updatedProductDescription)
+        return reject("no change was made");
       resolve();
     } catch (err) {
       reject(err);
@@ -42,6 +44,19 @@ const addLineToMany = (productIds, lineToAdd) =>
       .catch(reject);
   });
 
+const addLineToBrandProducts = (brandName, lineToAdd) =>
+  new Promise((resolve, reject) => {
+    let promises = [];
+    getProductsByBrand(brandName).then((products) =>
+      products.forEach(({id}) => {
+        promises.push(addLine(id, lineToAdd));
+      })
+    );
+    Promise.allSettled(promises)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+
 const removeLineFromMany = (productIds, lineToRemove) =>
   new Promise((resolve, reject) => {
     let promises = [];
@@ -53,11 +68,12 @@ const removeLineFromMany = (productIds, lineToRemove) =>
       .then((res) => resolve(res))
       .catch(reject);
   });
-
 exports.addLine = addLine;
-exports.removeLine = removeLine;
 exports.addLineToMany = addLineToMany;
+exports.removeLine = removeLine;
 exports.removeLineFromMany = removeLineFromMany;
+exports.addLineToBrandProducts = addLineToBrandProducts;
+
 
 function getProductDescription(id) {
   return new Promise(async (resolve, reject) => {
@@ -77,7 +93,7 @@ function updateProductDescription(productId, updatedProductDescription) {
       .put(`/catalog/products/${productId}`, {
         description: updatedProductDescription,
       })
-      .then(resolve)
+      .then((res) = resolve(res))
       .catch((err) => reject(err));
   });
 }
