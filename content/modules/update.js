@@ -51,7 +51,7 @@ const addLineToBrandProducts = (brandName, lineToAdd) =>
       products.forEach(({id}) => {
         promises.push(addLine(id, lineToAdd));
       })
-    );
+    ).catch(err => reject(err))
     Promise.allSettled(promises)
       .then((res) => resolve(res))
       .catch((err) => reject(err));
