@@ -114,7 +114,7 @@ function updateProductDescription(productId, updatedProductDescription) {
   });
 }
 
-function validateParams(numero, sentence, cb) {
-  if (typeof sentence !== "string") cb("lineToAdd must be a string");
-  if (typeof numero !== "number") cb("product id must be a number");
+function validateParams(numero, sentence, reject) {
+  if (typeof sentence !== "string") reject("lineToAdd must be a string");
+  if (typeof numero !== "number") reject("product id must be a number");
 }
