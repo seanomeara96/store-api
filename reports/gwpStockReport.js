@@ -17,9 +17,9 @@ getManyProductsBySKU(skuArray)
       )
       .join("\n");
     const msg = {
-      to: "seanom96@gmail.com",
+      to: "john@beautyfeatures.ie",
       from: "sean@beautyfeatures.ie",
-      subject: "Sending with SendGrid is Fun",
+      subject: "GWP Stock Report",
       text: "Hello there",
       html: data,
     };
