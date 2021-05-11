@@ -109,7 +109,7 @@ function updateProductDescription(productId, updatedProductDescription) {
       .put(`/catalog/products/${productId}`, {
         description: updatedProductDescription,
       })
-      .then((res = resolve(res)))
+      .then((res) = resolve(res))
       .catch((err) => reject(err));
   });
 }

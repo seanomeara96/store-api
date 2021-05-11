@@ -6,6 +6,7 @@ let skuArray = [
   { sku: "9448" },
   { sku: "10122" },
   { sku: "10151" },
+  { sku: "9357" },
 ];
 
 getManyProductsBySKU(skuArray)
@@ -17,7 +18,7 @@ getManyProductsBySKU(skuArray)
       )
       .join("\n");
     const msg = {
-      to: "john@beautyfeatures.ie",
+      to: "sean@beautyfeatures.ie",
       from: "sean@beautyfeatures.ie",
       subject: "GWP Stock Report",
       text: "Hello there",
