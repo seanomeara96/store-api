@@ -1,5 +1,4 @@
-// can we replace the domain in the linke
-const bfGwpTemplate = (link, linkText, threshold) => `<div
+exports.bfGwpTemplate = (link, linkText, threshold) => `<div
   style="
     padding: 12px 18px;
     margin-bottom: 12px;
@@ -29,11 +28,3 @@ const bfGwpTemplate = (link, linkText, threshold) => `<div
   </div>
 </div>
 `;
-
-console.log(
-  bfGwpTemplate(
-    "https://www.beautyfeatures.ie/free-caudalie-gift-with-purchase/",
-    "handy man",
-    "100"
-  )
-);
