@@ -20,8 +20,7 @@ const getAll =
               ...params,
             },
           });
-          if (data.data === undefined) return reject("data is undefined");
-          let dataArray = data.data;
+          let dataArray = data;
           if (dataArray.length) {
             aggregatedData.push(...dataArray);
             pageNumber++;
@@ -36,6 +35,9 @@ const getAll =
       getData();
     });
 
-getAll("/blog/posts").then((res) => {
-  console.log(res);
+const getAllBlogPosts = getAll("/blog/posts");
+
+getAllBlogPosts().then((blogPosts) => {
+  const results = blogPosts.map(({ body }) => body.includes("http://"));
+  console.log(results);
 });
