@@ -4,30 +4,33 @@ const store = require("../config/axios-config");
  * @param {*} URL supply url for get request
  * @returns
  */
-exports.getAll = (URL) => (params = {}) =>
-  new Promise((resolve, reject) => {
-    let pageNumber = 1;
-    let aggregatedData = [];
-    async function getData() {
-      try {
-        const { data } = await store.get(URL, {
-          params: {
-            limit: 250,
-            page: pageNumber,
-            ...params,
-          },
-        });
-        let dataArray = data.data;
-        if (dataArray.length) {
-          aggregatedData.push(...dataArray);
-          pageNumber++;
-          getData();
-        } else {
-          resolve(aggregatedData);
+exports.getAll =
+  (URL) =>
+  (params = {}) =>
+    new Promise((resolve, reject) => {
+      let pageNumber = 1;
+      let aggregatedData = [];
+      async function getData() {
+        try {
+          const { data } = await store.get(URL, {
+            params: {
+              limit: 250,
+              page: pageNumber,
+              ...params,
+            },
+          });
+          if (data.data === undefined) return reject("data is undefined");
+          let dataArray = data.data;
+          if (dataArray.length) {
+            aggregatedData.push(...dataArray);
+            pageNumber++;
+            getData();
+          } else {
+            resolve(aggregatedData);
+          }
+        } catch (err) {
+          reject(err);
         }
-      } catch (err) {
-        reject(err);
       }
-    }
-    getData();
-  });
+      getData();
+    });

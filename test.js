@@ -1,6 +1,7 @@
-const store = require("./config/axios-config");
 const { getAll } = require("./requests/getAll");
 
-const getAllVariants = getAll("/catalog/variants")
+const getAllBlogs = getAll("/blog/posts");
 
-getAllVariants().then(res => console.log(res))
+getAllBlogs()
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
