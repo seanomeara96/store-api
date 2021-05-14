@@ -1,8 +1,8 @@
 const axios = require("axios");
 const config = require("./config/config");
 const instance = axios.create({
-  baseURL: `https://api.bigcommerce.com/stores/${config.bf}/v2`,
-  headers: config.bf_xAuthTokenHeader,
+  baseURL: `https://api.bigcommerce.com/stores/${config.ih}/v2`,
+  headers: config.ih_xAuthTokenHeader,
 });
 
 const getAll =
@@ -37,7 +37,41 @@ const getAll =
 
 const getAllBlogPosts = getAll("/blog/posts");
 
-getAllBlogPosts().then((blogPosts) => {
-  const results = blogPosts.map(({ body }) => body.includes("http://")).filter(bool => bool == true)
-  console.log(results.length);
+getAllBlogPosts().then((posts) => {
+  let postsContainingHttp = posts.filter(
+    (post) => (post.body.match(/http:\/\//gi) || []).length > 0
+  );
+  if (!postsContainingHttp.length) {
+    console.log("there are no unsafe links");
+    return;
+  }
+  console.log(`${postsContainingHttp.length} posts need updating`);
+  let promises = [];
+  postsContainingHttp.forEach((post) => {
+    console.log(post.title, post.id);
+    const oldContent = post.body;
+    const updatedContent = oldContent.replace(/http:\/\//gi, "https://");
+    promises.push(updateBlogPost(post.id, updatedContent));
+  });
+  Promise.allSettled(promises)
+    .then((statuses) => {
+      console.log(`${statuses.length} posts were updated`);
+      getAllBlogPosts()
+        .then((blogPosts) => {
+          const results = blogPosts
+            .map(({ body }) => (body.match(/http:\/\//gi) || []).length)
+            .reduce((a, b) => a + b);
+          console.log(`${results} blog posts have unsafe links`);
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 });
+
+function updateBlogPost(blogPostId, updatedContent) {
+  return new Promise((resolve, reject) => {
+    instance
+      .put(`/blog/posts/${blogPostId}`, { body: updatedContent })
+      .then((updatedBlogPost) => resolve(updatedBlogPost.title));
+  }).catch((err) => reject(err));
+}
