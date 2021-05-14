@@ -1,8 +1,8 @@
 const axios = require("axios");
 const config = require("./config/config");
 const instance = axios.create({
-  baseURL: `https://api.bigcommerce.com/stores/${config.huk}/v2`,
-  headers: config.huk_xAuthTokenHeader,
+  baseURL: `https://api.bigcommerce.com/stores/${config.bf}/v2`,
+  headers: config.bf_xAuthTokenHeader,
 });
 
 const getAll =
@@ -38,6 +38,6 @@ const getAll =
 const getAllBlogPosts = getAll("/blog/posts");
 
 getAllBlogPosts().then((blogPosts) => {
-  const results = blogPosts.map(({ body }) => body.includes("http://"));
-  console.log(results);
+  const results = blogPosts.map(({ body }) => body.includes("http://")).filter(bool => bool == true)
+  console.log(results.length);
 });
