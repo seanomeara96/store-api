@@ -72,7 +72,7 @@ function updateBlogPost(blogPostId, updatedContent) {
   return new Promise((resolve, reject) => {
     instance
       .put(`/blog/posts/${blogPostId}`, { body: updatedContent })
-      .then((updatedBlogPost) => resolve(updatedBlogPost.title))
+      .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 }
