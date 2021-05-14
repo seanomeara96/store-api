@@ -43,7 +43,12 @@ const addLineToMany = (productIds, lineToAdd) =>
       .then((results) => resolve(results))
       .catch(reject);
   });
-
+/**
+ * 
+ * @param {string} brandName 
+ * @param {string} lineToAdd 
+ * @returns adds string to beginning of content
+ */
 const addLineToBrandProducts = (brandName, lineToAdd) =>
   new Promise((resolve, reject) => {
     let promises = [];
@@ -109,7 +114,7 @@ function updateProductDescription(productId, updatedProductDescription) {
       .put(`/catalog/products/${productId}`, {
         description: updatedProductDescription,
       })
-      .then((res) = resolve(res))
+      .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 }

@@ -1,4 +1,11 @@
-exports.bfGwpTemplate = (link, linkText, threshold) => `<div
+/**
+ * @param {string} brandName
+ * @param {string} link link to gwp pae
+ * @param {string} linkText name of the free gift
+ * @param {number} threshold how much you have to spend
+ * @returns promo banner for product content
+ */
+exports.bfGwpTemplate = (brandName, link, nameOfFreeGift, threshold) => `<div
   style="
     padding: 12px 18px;
     margin-bottom: 12px;
@@ -21,9 +28,9 @@ exports.bfGwpTemplate = (link, linkText, threshold) => `<div
         /[a-z\s]+:\/\/[w]{0,3}.?beautyfeatures.ie/gi,
         "%%GLOBAL_ShopPathSSL%%"
       )}"
-        >${linkText}</a
+        >${nameOfFreeGift}</a
       >
-      when you spend &euro;${threshold} or more on Caudalie
+      when you spend &euro;${threshold.toString()} or more on ${brandName}
     </p>
   </div>
 </div>
