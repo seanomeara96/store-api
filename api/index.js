@@ -1,4 +1,6 @@
-exports.brands = require("./brands");
-exports.categories = require("./categories");
-exports.customFields = require("./custom-fields");
-exports.products = require("./products");
+module.exports = {
+  brands: require("./brands"),
+  categories: require("./categories"),
+  customFields: require("./custom-fields"),
+  products: require("./products"),
+};
