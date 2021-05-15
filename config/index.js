@@ -5,7 +5,7 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const api = {
   store: undefined,
   config: (storeInitials, version = 3) => {
-    let storeInitials = storeInitials.toUpperCase();
+    storeInitials = storeInitials.toUpperCase();
     let stores = [
       "BF",
       "BSK",

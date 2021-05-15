@@ -1,5 +1,5 @@
 const { store } = require("../../config");
-exports.applyFilter = (productId, name, value) =>
+module.exports = (productId, name, value) =>
   new Promise(async (resolve, reject) => {
     const data = {
       name,

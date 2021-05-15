@@ -1,4 +1,4 @@
-const { getAll } = require("../../requests/getAll");
+const { getAll } = require("../lib/getAll");
 /**
  * This function fetches all brands resolves with an array of objects
  * @param {*} params
