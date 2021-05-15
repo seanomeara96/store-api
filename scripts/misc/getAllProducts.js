@@ -1,7 +1,7 @@
 const { config } = require("../../config");
-const { products } = require("../../api");
 config("bf");
-const { getAllProducts } = products;
-getAllProducts()
+const api = require("../../api");
+api.brands
+  .getAllBrands()
   .then((res) => console.log(res))
   .catch((err) => console.log(err));
