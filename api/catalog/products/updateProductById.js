@@ -1,4 +1,4 @@
-const { store } = require("../../config");
+const { store } = require("../../../config");
 module.exports = (productId, updatedProperty) =>
   new Promise((resolve, reject) => {
     store

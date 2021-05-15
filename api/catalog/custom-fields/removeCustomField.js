@@ -1,5 +1,5 @@
 const getCustomFieldsByProductId = require("./getCustomFieldsByProductId");
-const { store } = require("../../config");
+const { store } = require("../../../config");
 module.exports = (productId, name, value) =>
   new Promise(async (resolve, reject) => {
     if (name == "" || value == "")

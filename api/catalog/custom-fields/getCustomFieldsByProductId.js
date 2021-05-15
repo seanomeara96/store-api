@@ -1,4 +1,4 @@
-const { store } = require("../../config");
+const { store } = require("../../../config");
 module.exports = (productId) =>
   new Promise(async (resolve, reject) => {
     try {
