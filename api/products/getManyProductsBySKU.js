@@ -1,6 +1,6 @@
 const getAllProducts = require("./getAllProducts");
 
-exports.getManyProductsBySKU = (skuArray) =>
+module.exports = (skuArray) =>
   new Promise((resolve, reject) => {
     let promises = [];
     let products = [];

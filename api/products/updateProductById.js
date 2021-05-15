@@ -1,5 +1,5 @@
 const { store } = require("../../config");
-exports.updateProductById = (productId, updatedProperty) =>
+module.exports = (productId, updatedProperty) =>
   new Promise((resolve, reject) => {
     store
       .put(`/catalog/products/${productId}`, {

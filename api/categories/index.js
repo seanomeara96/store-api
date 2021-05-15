@@ -1,3 +1,5 @@
-exports.getAllCategories = require("./getAllCategories");
-exports.getCategoryByName = require("./getCategoryByName");
-exports.getCategoryIdByName = require("./getCategoryIdByName");
+module.exports = {
+  getAllCategories: require("./getAllCategories"),
+  getCategoryByName: require("./getCategoryByName"),
+  getCategoryIdByName: require("./getCategoryIdByName"),
+};

@@ -1,7 +1,9 @@
-exports.content = require("./content");
-exports.getAllProducts = require("./getAllProducts");
-exports.getManyProductsBySKU = require("./getManyProductsBySKU");
-exports.getProductById = require("./getProductById");
-exports.getProductsByBrand = require("./getProductsByBrand");
-exports.getProductsByCategory = require("./getProductsByCategory");
-exports.updateProductById = require("./updateProductById");
+module.exports = {
+  content: require("./content"),
+  getAllProducts: require("./getAllProducts"),
+  getManyProductsBySKU: require("./getManyProductsBySKU"),
+  getProductById: require("./getProductById"),
+  getProductsByBrand: require("./getProductsByBrand"),
+  getProductsByCategory: require("./getProductsByCategory"),
+  updateProductById: require("./updateProductById"),
+};

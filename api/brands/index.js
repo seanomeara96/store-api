@@ -1,3 +1,5 @@
-exports.getAllBrands = require("./getAllBrands");
-exports.getBrandByName = require("./getBrandByName");
-exports.getBrandIdByName = require("./getBrandIdByName");
+module.exports = {
+  getAllBrands: require("./getAllBrands"),
+  getBrandByName: require("./getBrandByName"),
+  getBrandIdByName: require("./getBrandIdByName"),
+};
