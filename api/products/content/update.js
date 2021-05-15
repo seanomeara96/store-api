@@ -1,6 +1,6 @@
 const store = require("../../config/axios-config");
 const { getProductsByBrand } = require("../../products/getProductsByBrand");
-const addLine = (productId, lineToAdd) =>
+exports.addLine = (productId, lineToAdd) =>
   new Promise(async (resolve, reject) => {
     validateParams(productId, lineToAdd, reject);
     try {
@@ -13,7 +13,7 @@ const addLine = (productId, lineToAdd) =>
     }
   });
 
-const removeLine = (productId, lineToRemove) =>
+exports.removeLine = (productId, lineToRemove) =>
   new Promise(async (resolve, reject) => {
     validateParams(productId, lineToRemove, reject);
     try {
@@ -32,7 +32,7 @@ const removeLine = (productId, lineToRemove) =>
     }
   });
 
-const addLineToMany = (productIds, lineToAdd) =>
+exports.addLineToMany = (productIds, lineToAdd) =>
   new Promise((resolve, reject) => {
     let promises = [];
     productIds.forEach((product) => {
@@ -44,12 +44,12 @@ const addLineToMany = (productIds, lineToAdd) =>
       .catch(reject);
   });
 /**
- * 
- * @param {string} brandName 
- * @param {string} lineToAdd 
+ *
+ * @param {string} brandName
+ * @param {string} lineToAdd
  * @returns adds string to beginning of content
  */
-const addLineToBrandProducts = (brandName, lineToAdd) =>
+exports.addLineToBrandProducts = (brandName, lineToAdd) =>
   new Promise((resolve, reject) => {
     let promises = [];
     getProductsByBrand(brandName)
@@ -64,7 +64,7 @@ const addLineToBrandProducts = (brandName, lineToAdd) =>
       .catch((err) => reject(err));
   });
 
-  const removeLineFromBrandProducts = (brandName, lineToRemove) =>
+exports.removeLineFromBrandProducts = (brandName, lineToRemove) =>
   new Promise((resolve, reject) => {
     let promises = [];
     getProductsByBrand(brandName)
@@ -79,7 +79,7 @@ const addLineToBrandProducts = (brandName, lineToAdd) =>
       .catch((err) => reject(err));
   });
 
-const removeLineFromMany = (productIds, lineToRemove) =>
+exports.removeLineFromMany = (productIds, lineToRemove) =>
   new Promise((resolve, reject) => {
     let promises = [];
     productIds.forEach((product) => {
@@ -90,12 +90,7 @@ const removeLineFromMany = (productIds, lineToRemove) =>
       .then((res) => resolve(res))
       .catch(reject);
   });
-exports.addLine = addLine;
-exports.addLineToMany = addLineToMany;
-exports.removeLine = removeLine;
-exports.removeLineFromMany = removeLineFromMany;
-exports.addLineToBrandProducts = addLineToBrandProducts;
-exports.removeLineFromBrandProducts = removeLineFromBrandProducts;
+
 function getProductDescription(id) {
   return new Promise(async (resolve, reject) => {
     try {

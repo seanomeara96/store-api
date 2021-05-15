@@ -1,4 +1,4 @@
-const store = require("../../config/axios-config");
+const store = require("../../../config/axios-config");
 
 const getFilters = (productId) =>
   new Promise(async (resolve, reject) => {

@@ -1,4 +1,4 @@
-const store = require("../config/axios-config");
+const store = require("../../config/axios-config");
 const { getProductById } = require("../products/getProductById");
 /**
  * This needs to be tested before using

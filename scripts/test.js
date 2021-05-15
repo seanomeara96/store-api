@@ -1,5 +1,5 @@
 const axios = require("axios");
-const config = require("./config/config");
+const config = require("../config/config");
 const instance = axios.create({
   baseURL: `https://api.bigcommerce.com/stores/${config.ih}/v2`,
   headers: config.ih_xAuthTokenHeader,
