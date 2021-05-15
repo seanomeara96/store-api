@@ -1,4 +1,4 @@
-const store = require("../config/axios-config");
+const store = require("../../config");
 /**
  * Get-all function to retrieve all info from a given url
  * @param {*} URL supply url for get request

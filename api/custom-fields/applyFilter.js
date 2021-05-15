@@ -1,9 +1,17 @@
-const { applyFilter } = require("./modules/create");
-
-applyFilter(178, "Proceive", "Men & Women")
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
+const { store } = require("../../config");
+exports.applyFilter = (productId, name, value) =>
+  new Promise(async (resolve, reject) => {
+    const data = {
+      name,
+      value,
+    };
+    try {
+      const { status } = await store.post(
+        `/catalog/products/${productId}/custom-fields`,
+        data
+      );
+      resolve(status);
+    } catch (err) {
+      reject(err);
+    }
   });

@@ -1,28 +1,12 @@
-const { applyManyFiltersToMany } = require("./modules/create");
-
-const productIDs = [
-  { "Product ID": 177 },
-  { "Product ID": 178 },
-  { "Product ID": 179 },
-  { "Product ID": 180 },
-  { "Product ID": 181 },
-];
-
-const filters = [
-  {
-    name: "Proceive",
-    value: "Men",
-  },
-  {
-    name: "Proceive",
-    value: "Women",
-  },
-  {
-    name: "Proceive",
-    value: "Men & Women",
-  },
-];
-
-applyManyFiltersToMany(productIDs, filters)
-  .then((res) => res.forEach((item) => console.log(item.value)))
-  .catch(() => console.log("err"));
+const { applyManyFilters } = require("./applyManyFilters");
+exports.applyManyFiltersToMany = (productIds, filters) =>
+  new Promise((resolve, reject) => {
+    let promises = [];
+    productIds.forEach((product) => {
+      const idKey = Object.keys(product);
+      promises.push(applyManyFilters(product[idKey], filters));
+    });
+    Promise.allSettled(promises)
+      .then((results) => resolve(results))
+      .catch(reject);
+  });

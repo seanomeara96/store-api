@@ -1,10 +1,9 @@
 const { applyFilter } = require("./applyFilter");
-exports.applyFilterToMany = (productIds, name, value) =>
+exports.applyManyFilters = (productId, filters) =>
   new Promise((resolve, reject) => {
     let promises = [];
-    productIds.forEach((product) => {
-      const idKey = Object.keys(product)[0];
-      promises.push(applyFilter(product[idKey], name, value));
+    filters.forEach(({ name, value }) => {
+      promises.push(applyFilter(productId, name, value));
     });
     Promise.allSettled(promises)
       .then((results) => resolve(results))

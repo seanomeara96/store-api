@@ -1,14 +1,15 @@
-const { applySpecificFilters } = require("./modules/create");
-
-const data = [
-  {
-    "Product Id": 177,
-    Filters: "Proceive=Men;Proceive=Women;Proceive=Women & Men",
-  },
-  { "Product Id": 178, Filters: "Proceive=Women;Proceive=Women & Men" },
-  { "Product Id": 179, Filters: "Proceive=Men;Proceive=Women & Men" },
-  { "Product Id": 180, Filters: "Proceive=Men;Proceive=Women;" },
-  { "Product Id": 181, Filters: "Proceive=Men;" },
-];
-
-applySpecificFilters(data);
+const { applyFilter } = require("./applyFilter");
+exports.applySpecificFilters = (data) =>
+  new Promise((resolve, reject) => {
+    let promises = [];
+    data.forEach((item) => {
+      const id = item["Product Id"];
+      const filters = item["Filters"]
+        .split(";")
+        .map((filter) => filter.split("="));
+      filters.forEach((filter) => {
+        promises.push(applyFilter(id, filter[0], filter[1]));
+      });
+    });
+    Promise.allSettled(promises).then(resolve).catch(reject);
+  });
