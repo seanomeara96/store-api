@@ -4,4 +4,4 @@ const { getAll } = require("../lib/getAll");
  * @param {*} params
  * @returns
  */
-exports.getAllBrands = getAll("/catalog/brands");
+module.exports = getAll("/catalog/brands");

@@ -1,5 +1,5 @@
-const { updateProductById } = require("../updateProductById");
-exports.updateProductDescription = (productId, updatedProductDescription) =>
+const updateProductById = require("../updateProductById");
+module.exports = (productId, updatedProductDescription) =>
   new Promise((resolve, reject) => {
     updateProductById(productId, { description: updatedProductDescription })
       .then((res) => resolve(res))

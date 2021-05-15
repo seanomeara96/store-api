@@ -1,12 +1,12 @@
-const { getProductsByBrand } = require("../getProductsByBrand");
-const { addLine } = require("./addline");
+const getProductsByBrand = require("../getProductsByBrand");
+const addLine = require("./addline");
 /**
  *
  * @param {string} brandName
  * @param {string} lineToAdd
  * @returns adds string to beginning of content
  */
-exports.addLineToBrandProducts = (brandName, lineToAdd) =>
+module.exports = (brandName, lineToAdd) =>
   new Promise((resolve, reject) => {
     let promises = [];
     getProductsByBrand(brandName)

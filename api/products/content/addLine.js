@@ -1,7 +1,7 @@
-const { getProductDescription } = require("./getProductDescription");
-const { updateProductDescription } = require("./updateProductDescription");
-const { validateParams } = require("./utils/validateParams");
-exports.addLine = (productId, lineToAdd) =>
+const getProductDescription = require("./getProductDescription");
+const updateProductDescription = require("./updateProductDescription");
+const validateParams = require("./utils/validateParams");
+module.exports = (productId, lineToAdd) =>
   new Promise(async (resolve, reject) => {
     validateParams(productId, lineToAdd, reject);
     try {

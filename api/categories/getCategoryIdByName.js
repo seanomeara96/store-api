@@ -1,6 +1,6 @@
-const { getCategoryByName } = require("./getCategoryByName");
+const getCategoryByName = require("./getCategoryByName");
 
-exports.getCategoryIdByName = (name) =>
+module.exports = (name) =>
   new Promise((resolve, reject) =>
     getCategoryByName(name)
       .then(({ id }) => resolve(id))

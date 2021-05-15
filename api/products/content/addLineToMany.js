@@ -1,5 +1,5 @@
-const { addLine } = require("./addLine");
-exports.addLineToMany = (productIds, lineToAdd) =>
+const addLine = require("./addLine");
+module.exports = (productIds, lineToAdd) =>
   new Promise((resolve, reject) => {
     let promises = [];
     productIds.forEach((product) => {

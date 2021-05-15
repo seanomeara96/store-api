@@ -1,11 +1,11 @@
-const { getBrandIdByName } = require("../brands/getBrandIdByName");
-const { getAllProducts } = require("./getAllProducts");
+const { getBrandIdByName } = require("../brands");
+const getAllProducts = require("./getAllProducts");
 /**
  * Fetches all products by brand name, resolves with an array of objects
  * @param {*} name
  * @returns
  */
-exports.getProductsByBrand = (name) =>
+module.exports = (name) =>
   new Promise((resolve, reject) =>
     getBrandIdByName(name).then((brand_id) =>
       getAllProducts({ brand_id })

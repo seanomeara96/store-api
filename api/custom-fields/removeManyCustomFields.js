@@ -1,4 +1,4 @@
-const { removeCustomField } = require("./removeCustomField");
+const removeCustomField = require("./removeCustomField");
 
 module.exports = (productId, customFields) =>
   new Promise((resolve, reject) => {

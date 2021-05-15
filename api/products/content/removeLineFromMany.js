@@ -1,5 +1,5 @@
-const { removeLine } = require("./removeLine");
-exports.removeLineFromMany = (productIds, lineToRemove) =>
+const removeLine = require("./removeLine");
+module.exports = (productIds, lineToRemove) =>
   new Promise((resolve, reject) => {
     let promises = [];
     productIds.forEach((product) => {

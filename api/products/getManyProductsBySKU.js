@@ -1,4 +1,4 @@
-const { getAllProducts } = require("./getAllProducts");
+const getAllProducts = require("./getAllProducts");
 
 exports.getManyProductsBySKU = (skuArray) =>
   new Promise((resolve, reject) => {

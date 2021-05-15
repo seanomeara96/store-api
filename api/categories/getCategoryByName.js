@@ -1,10 +1,10 @@
-const { getAllCategories } = require("./getAllCategories");
+const getAllCategories = require("./getAllCategories");
 /**
  * Fetches a category object by name, if there are multiple it will reject
  * @param {*} name
  * @returns
  */
-exports.getCategoryByName = (name) =>
+module.exports = (name) =>
   new Promise((resolve, reject) =>
     getAllCategories({ name })
       .then((res) => {

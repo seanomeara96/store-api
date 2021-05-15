@@ -1,6 +1,6 @@
-const { getProductsByBrand } = require("../getProductsByBrand");
-const { removeLine } = require("./removeLine");
-exports.removeLineFromBrandProducts = (brandName, lineToRemove) =>
+const getProductsByBrand = require("../getProductsByBrand");
+const removeLine = require("./removeLine");
+module.exports = (brandName, lineToRemove) =>
   new Promise((resolve, reject) => {
     let promises = [];
     getProductsByBrand(brandName)

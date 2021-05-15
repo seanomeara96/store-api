@@ -1,10 +1,10 @@
-const store = require("../config/axios-config");
+const { store } = require("../../config");
 /**
  *
  * @param {*} productId
  * @returns product object
  */
-exports.getProductById = (productId) =>
+module.exports = (productId) =>
   new Promise((resolve, reject) =>
     store
       .get(`/catalog/products/${productId}`)
