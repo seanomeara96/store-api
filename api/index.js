@@ -3,6 +3,7 @@ const path = require("path");
 const axios = require("axios");
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const catalog = require("./catalog");
+const { getAll } = require("./lib/getAll");
 class Manager {
   constructor(storeInitials, version = 3) {
     storeInitials = storeInitials.toUpperCase();
@@ -30,5 +31,10 @@ class Manager {
     });
   }
 }
-Object.assign(Manager.prototype, catalog);
+Manager.prototype.getAll = getAll;
+for (let prop in catalog) {
+  for (let fn in catalog[prop]) {
+    Manager.prototype[fn] = catalog[prop][fn];
+  }
+}
 module.exports = Manager;

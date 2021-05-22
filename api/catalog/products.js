@@ -1,14 +1,18 @@
-const content = require("./content");
-const products = {
+module.exports = {
+  content: require("./content"),
   /**
    * Fetches all products, 250 at a time recursively
    * @param {*} params
    * @returns resolves with an array of product objects
    */
-  getAllProducts() {
-    this.getAll(`/catalog/products`);
+  getAllProducts: function () {
+    return new Promise((resolve, reject) => {
+      this.getAll(`/catalog/products`)
+        .then((products) => resolve(products))
+        .catch((err) => reject(err));
+    });
   },
-  getManyProductsBySKU(skuArray) {
+  getManyProductsBySKU: function (skuArray) {
     return new Promise((resolve, reject) => {
       let promises = [];
       let products = [];
@@ -32,7 +36,7 @@ const products = {
    * @param {*} productId
    * @returns product object
    */
-  getProductById(productId) {
+  getProductById: function (productId) {
     return new Promise((resolve, reject) =>
       this.store
         .get(`/catalog/products/${productId}`)
@@ -45,7 +49,7 @@ const products = {
    * @param {*} name
    * @returns
    */
-  getProductsByBrand(name) {
+  getProductsByBrand: function (name) {
     return new Promise((resolve, reject) =>
       this.getBrandIdByName(name).then((brand_id) =>
         this.getAllProducts({ brand_id })
@@ -54,10 +58,10 @@ const products = {
       )
     ).catch((err) => reject(err));
   },
-  getProductsByCategory() {
+  getProductsByCategory: function () {
     // nothing here
   },
-  updateProductById(productId, updatedProperty) {
+  updateProductById: function (productId, updatedProperty) {
     return new Promise((resolve, reject) => {
       this.store
         .put(`/catalog/products/${productId}`, {
@@ -68,7 +72,3 @@ const products = {
     });
   },
 };
-
-Object.assign(products.prototype, content);
-
-module.exports = products;

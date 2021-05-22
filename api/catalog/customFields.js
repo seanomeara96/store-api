@@ -1,5 +1,5 @@
-const customFields = {
-  applyCustomField(productId, name, value) {
+module.exports = {
+  applyCustomField: function (productId, name, value) {
     return new Promise(async (resolve, reject) => {
       const data = {
         name,
@@ -16,7 +16,7 @@ const customFields = {
       }
     });
   },
-  applyCustomFieldsToMany(productIds, name, value) {
+  applyCustomFieldsToMany: function (productIds, name, value) {
     return new Promise((resolve, reject) => {
       let promises = [];
       productIds.forEach((product) => {
@@ -28,7 +28,7 @@ const customFields = {
         .catch(reject);
     });
   },
-  applyManyCustomFields(productId, customField) {
+  applyManyCustomFields: function (productId, customField) {
     return new Promise((resolve, reject) => {
       let promises = [];
       customField.forEach(({ name, value }) => {
@@ -39,7 +39,7 @@ const customFields = {
         .catch(reject);
     });
   },
-  applyManyCustomFieldsToMany(productIds, customFields) {
+  applyManyCustomFieldsToMany: function (productIds, customFields) {
     return new Promise((resolve, reject) => {
       let promises = [];
       productIds.forEach((product) => {
@@ -51,7 +51,7 @@ const customFields = {
         .catch(reject);
     });
   },
-  applySpecificCustomFields(data) {
+  applySpecificCustomFields: function (data) {
     return new Promise((resolve, reject) => {
       let promises = [];
       data.forEach((item) => {
@@ -66,7 +66,7 @@ const customFields = {
       Promise.allSettled(promises).then(resolve).catch(reject);
     });
   },
-  getCustomFieldsByProductId(productId) {
+  getCustomFieldsByProductId: function (productId) {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await this.store.get(
@@ -78,7 +78,7 @@ const customFields = {
       }
     });
   },
-  getCustomFieldsOfManyProducts(productIds) {
+  getCustomFieldsOfManyProducts: function (productIds) {
     new Promise((resolve, reject) => {
       let response = {};
       Promise.allSettled(
@@ -97,7 +97,7 @@ const customFields = {
         .catch(reject);
     });
   },
-  removeCustomField(productId, name, value) {
+  removeCustomField: function (productId, name, value) {
     return new Promise(async (resolve, reject) => {
       if (name == "" || value == "")
         return reject("please provide a key & a value");
@@ -119,7 +119,7 @@ const customFields = {
       }
     });
   },
-  removeCustomFieldFromMany(productIds, name, value) {
+  removeCustomFieldFromMany: function (productIds, name, value) {
     return new Promise((resolve, reject) => {
       let promises = [];
       productIds.forEach((product) => {
@@ -131,7 +131,7 @@ const customFields = {
         .catch((err) => reject(err));
     });
   },
-  removeManyCustomFields(productId, customFields) {
+  removeManyCustomFields: function (productId, customFields) {
     return new Promise((resolve, reject) => {
       let promises = [];
       customFields.forEach(({ name, value }) => {
@@ -140,7 +140,7 @@ const customFields = {
       Promise.allSettled(promises).then(resolve).catch(reject);
     });
   },
-  removeManyCustomFieldsFromMany(productIds, customFields) {
+  removeManyCustomFieldsFromMany: function (productIds, customFields) {
     return new Promise((resolve, reject) => {
       let promises = [];
       productIds.forEach((product) => {
@@ -153,4 +153,3 @@ const customFields = {
     });
   },
 };
-module.exports = customFields;

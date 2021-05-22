@@ -1,13 +1,7 @@
-const brands = require("./brands");
-const categories = require("./categories");
-const customFields = require("./custom-fields");
-const products = require("./products");
-
-const catalog = {};
-
-Object.assign(catalog.prototype, brands);
-Object.assign(catalog.prototype, categories);
-Object.assign(catalog.prototype, customFields);
-Object.assign(catalog.prototype, products);
-
-module.exports = catalog;
+module.exports = {
+  brands: require("./brands"),
+  categories: require("./categories"),
+  customFields: require("./customFields"),
+  products: require("./products"),
+  content: require("./content"),
+};

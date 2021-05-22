@@ -1,6 +1,6 @@
 const validateParams = require("./utils/validateParams");
-const content = {
-  addLine(productId, lineToAdd) {
+module.exports = {
+  addLine: function (productId, lineToAdd) {
     return new Promise(async (resolve, reject) => {
       validateParams(productId, lineToAdd, reject);
       try {
@@ -22,7 +22,7 @@ const content = {
    * @param {string} lineToAdd
    * @returns adds string to beginning of content
    */
-  addLineToBrandProducts(brandName, lineToAdd) {
+  addLineToBrandProducts: function (brandName, lineToAdd) {
     new Promise((resolve, reject) => {
       let promises = [];
       this.getProductsByBrand(brandName)
@@ -37,7 +37,7 @@ const content = {
         .catch((err) => reject(err));
     });
   },
-  addLineToMany(productIds, lineToAdd) {
+  addLineToMany: function (productIds, lineToAdd) {
     return new Promise((resolve, reject) => {
       let promises = [];
       productIds.forEach((product) => {
@@ -49,7 +49,7 @@ const content = {
         .catch(reject);
     });
   },
-  getProductDescription(id) {
+  getProductDescription: function (id) {
     return new Promise(async (resolve, reject) => {
       try {
         const product = await this.store.get(`/catalog/products/${id}`);
@@ -60,7 +60,7 @@ const content = {
       }
     });
   },
-  removeLine(productId, lineToRemove) {
+  removeLine: function (productId, lineToRemove) {
     return new Promise(async (resolve, reject) => {
       validateParams(productId, lineToRemove, reject);
       try {
@@ -82,7 +82,7 @@ const content = {
       }
     });
   },
-  removeLineFromBrandProducts(brandName, lineToRemove) {
+  removeLineFromBrandProducts: function (brandName, lineToRemove) {
     return new Promise((resolve, reject) => {
       let promises = [];
       this.getProductsByBrand(brandName)
@@ -97,7 +97,7 @@ const content = {
         .catch((err) => reject(err));
     });
   },
-  removeLineFromMany(productIds, lineToRemove) {
+  removeLineFromMany: function (productIds, lineToRemove) {
     return new Promise((resolve, reject) => {
       let promises = [];
       productIds.forEach((product) => {
@@ -109,7 +109,7 @@ const content = {
         .catch(reject);
     });
   },
-  updateProductDescription(productId, updatedProductDescription) {
+  updateProductDescription: function (productId, updatedProductDescription) {
     return new Promise((resolve, reject) => {
       this.updateProductById(productId, {
         description: updatedProductDescription,
@@ -119,4 +119,3 @@ const content = {
     });
   }, // redundant?
 };
-module.exports = content;
