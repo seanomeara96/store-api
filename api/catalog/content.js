@@ -1,5 +1,11 @@
 const validateParams = require("./utils/validateParams");
 module.exports = {
+  /**
+   *
+   * @param {number} productId
+   * @param {string} lineToAdd
+   * @returns adds lin to beginning of content
+   */
   addLine: function (productId, lineToAdd) {
     return new Promise(async (resolve, reject) => {
       validateParams(productId, lineToAdd, reject);
@@ -20,7 +26,7 @@ module.exports = {
    *
    * @param {string} brandName
    * @param {string} lineToAdd
-   * @returns adds string to beginning of content
+   * @returns adds string to beginning of product content for a brand
    */
   addLineToBrandProducts: function (brandName, lineToAdd) {
     new Promise((resolve, reject) => {
@@ -37,6 +43,12 @@ module.exports = {
         .catch((err) => reject(err));
     });
   },
+  /**
+   *
+   * @param {array} productIds
+   * @param {string} lineToAdd
+   * @returns adds line to many products specified in a list
+   */
   addLineToMany: function (productIds, lineToAdd) {
     return new Promise((resolve, reject) => {
       let promises = [];
@@ -49,6 +61,11 @@ module.exports = {
         .catch(reject);
     });
   },
+  /**
+   *
+   * @param {number} id
+   * @returns product description of a product by id
+   */
   getProductDescription: function (id) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -60,12 +77,17 @@ module.exports = {
       }
     });
   },
+  /**
+   *
+   * @param {number} productId
+   * @param {string} lineToRemove
+   * @returns removes string from product content
+   */
   removeLine: function (productId, lineToRemove) {
     return new Promise(async (resolve, reject) => {
       validateParams(productId, lineToRemove, reject);
       try {
         const productDescription = await this.getProductDescription(productId);
-        console.log(productDescription);
         const updatedProductDescription = productDescription.replace(
           lineToRemove,
           ""
@@ -82,6 +104,12 @@ module.exports = {
       }
     });
   },
+  /**
+   *
+   * @param {string} brandName
+   * @param {string} lineToRemove
+   * @returns remove line from product content by brand
+   */
   removeLineFromBrandProducts: function (brandName, lineToRemove) {
     return new Promise((resolve, reject) => {
       let promises = [];
@@ -97,6 +125,12 @@ module.exports = {
         .catch((err) => reject(err));
     });
   },
+  /**
+   *
+   * @param {array} productIds
+   * @param {string} lineToRemove
+   * @returns removes line from many products
+   */
   removeLineFromMany: function (productIds, lineToRemove) {
     return new Promise((resolve, reject) => {
       let promises = [];
@@ -109,6 +143,12 @@ module.exports = {
         .catch(reject);
     });
   },
+  /**
+   *
+   * @param {number} productId
+   * @param {string} updatedProductDescription
+   * @returns updates product description
+   */
   updateProductDescription: function (productId, updatedProductDescription) {
     return new Promise((resolve, reject) => {
       this.updateProductById(productId, {

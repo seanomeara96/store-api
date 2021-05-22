@@ -1,13 +1,12 @@
 module.exports = {
-  content: require("./content"),
   /**
    * Fetches all products, 250 at a time recursively
    * @param {*} params
    * @returns resolves with an array of product objects
    */
-  getAllProducts: function () {
+  getAllProducts: function (params) {
     return new Promise((resolve, reject) => {
-      this.getAll(`/catalog/products`)
+      this.getAll(`/catalog/products`, params)
         .then((products) => resolve(products))
         .catch((err) => reject(err));
     });

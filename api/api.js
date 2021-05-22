@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const axios = require("axios");
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
-const catalog = require("./catalog");
+const catalog = require("./catalog/catalog");
 const { getAll } = require("./lib/getAll");
 class Manager {
   constructor(storeInitials, version = 3) {

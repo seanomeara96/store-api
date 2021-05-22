@@ -1,4 +1,5 @@
-const { getManyProductsBySKU } = require("../products/getManyProductsBySKU");
+const Manager = require("../../api/api");
+const bfManager = new Manager("bf");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 let skuArray = [
@@ -16,7 +17,8 @@ const myselfAndBrendan = [
   "sean@beautyfeatures.ie",
   "brendan@beautyfeatures.ie",
 ];
-getManyProductsBySKU(skuArray)
+bfManager
+  .getManyProductsBySKU(skuArray)
   .then((res) => {
     const data = res
       .map(

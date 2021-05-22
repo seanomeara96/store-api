@@ -4,9 +4,9 @@ module.exports = {
    * @param {*} params
    * @returns
    */
-  getAllCategories: function () {
+  getAllCategories: function (params) {
     return new Promise((resolve, reject) => {
-      this.getAll("/catalog/categories")
+      this.getAll("/catalog/categories", params)
         .then((res) => resolve(res))
         .catch((err) => reject(err));
     });
@@ -18,7 +18,7 @@ module.exports = {
    */
   getCategoryByName: function (name) {
     return new Promise((resolve, reject) =>
-      this.getAllCategoriesgetAllCategories({ name })
+      this.getAllCategoriesget({ name })
         .then((res) => {
           if (res.length > 1)
             return reject("there are multiple categories with this name");
@@ -27,6 +27,11 @@ module.exports = {
         .catch((err) => reject(err))
     );
   },
+  /**
+   *
+   * @param {string} name
+   * @returns catageory id integer
+   */
   getCategoryIdByName: function (name) {
     return new Promise((resolve, reject) =>
       this.getCategoryByName(name)

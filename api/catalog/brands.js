@@ -4,9 +4,9 @@ module.exports = {
    * @param {*} params
    * @returns
    */
-  getAllBrands: function () {
+  getAllBrands: function (params) {
     return new Promise((resolve, reject) => {
-      this.getAll("/catalog/brands")
+      this.getAll("/catalog/brands", params)
         .then((res) => resolve(res))
         .catch((err) => reject(err));
     });
